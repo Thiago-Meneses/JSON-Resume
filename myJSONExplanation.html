@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css" >
+    </head>
+    <body>
+        <h1>JSON</h1>
+        <h2>JavaScript Object Notation</h2>
+        
+        <div>
+            <p>O JSON pode ser usado para: Enviar dados para um servidor; Receber dados de um servidor</p>
+            <p>Se estiver recebendo dados de um servidor, eles sempre virão em formato <b>String</b></p>
+            <p>ex: ' {"name":"John", "age":30, "city":"New York"} ' → Os dados sempre virão entre aspas simples</p>
+        </div>
+
+        <div>
+            <h3>SINTAXE</h3>
+		    <p>
+                A sintaxe do JSON é baseada da Javascript Object Notation <br>
+                Assim como Objetos do JavaScript podem ser escritos em JSON, os Vetores do JavaScript também podem <br>
+                Por ser apenas texto, pode ser interpretado por outras linguagens, além do próprio Javascript <br>
+		        As informações são representadas na forma: <b>"key": "value"</b> → Sempre sendo separados por aspas duplas <br>
+                Cada key/value pair é separado do próximo por vírgula, o último não terá virgula por não ser seguido por mais nenhum key/value pair <br>
+                As Chaves {} sempre irão conter objetos <br>
+                Os Colchetes [] sempre irão conter vetores <br>
+            </p>
+
+            <h3>VALORES VÁLIDOS</h3>
+                <p>Os valores considerados válidos em JSON são:</p>
+                <ul>
+                    <li><b>String</b> → {"name":"John"}</li>
+                    <li><b>Number</b> → {"age":30}</li>
+                    <li><b>JSON Object</b> → { "employee": { "name":"John", "age":30, "city":"New York" } }</li>
+                    <li><b>Arrays</b> → { "employees": ["John", "Anna", "Peter"] }</li>
+                    <li><b>Boolean</b> → {"married": false}</li>
+                    <li><b>null</b> → {"middleName":null}</li>
+                </ul>
+
+		    
+            <h3>VALORES INVÁLIDOS</h3>
+            <ul>
+                <li><b>Funções</b></li>
+                <p>
+                    Caso seja necessário incluir funções dentro do JSON, estas deverão ser escritas no formato String <br>
+                    Após isso é necessário converter a String em função novamente: <br>
+                    -const text = ' { "name": "Michael", "age": "function () { return 30; }" } '; <br>
+                    -const obj = JSON.parse(text); <br>
+                    -obj.age = eval(" (" + obj.age + ") "); <br> <br>
+                    Não é recomendado usar a função eval() <br>
+                    Não é recomendado usar funções no JSON, pois elas perderão seu escopo, sendo necessário usar o eval() para converte-las novamente em funções
+                </p>
+
+                <li><b>Datas</b></li>
+                <p>
+                    Caso seja necessário incluir datas dentro do JSON, estas deverão ser escritas no formato String <br>
+                    Após isso é necessário converter a String novamente em data: <br>
+                    -const text = ' {"name":"John", "birth":"1986-12-14"} '; <br>
+                    -const obj = JSON.parse(text); <br>
+                    -obj.birth = new Date(obj.birth); <br>
+                    <br>
+                    Para converter a data também pode ser usado o segundo parâmetro da função JSON.parse(), chamado reviver <br>
+                    O parâmetro reviver é uma função <br>
+                    Ele verifica cada propriedade antes de retornar um valor <br>
+                    -const text = ' { "name": "Michael", "birth": 1984-12-14 } ' <br>
+                    -const obj = JSON.parse(text, function (key, value) { <br>
+                    -if ( key == birth) <br>
+                    --return new Date (obj.birth); <br>
+                    -else <br>
+                    --return value; <br>
+                    }); <br>
+                </p>
+
+                <li><b>undefined</b></li>
+            </ul>
+
+            <p>O próprio Javascript já tem funções específicas para o JSON:</p>
+            <h2>JSON.Parse()</h2>
+                <p>
+                    ∟Converte as Strings JSON que foram retornadas por um servidor qualquer <br>
+                    ∟Caso sejam Strings JSON, serão convertidas em objetos do Javascript <br>
+                    ∟Também pode converter JSON Arrays, serão convertidos em vetores do Javascript <br>
+                </p>
+            
+            <h2>JSON.Stringify() </h2>
+                <p>
+                    Converte os <b>Javascript Objects</b> a ser enviados para um servidor em <b>Strings JSON</b><br>
+                    ex: <br>
+                    -const obj = {name: "John", age: 30}; <br>
+                    -const myJSON = JSON.stringify(obj); <br>
+                    *myJSON agora é uma String, pronta para ser enviada para o servidor	
+                </p>
+                <p>
+                    Também pode converter <b>Javascript Arrays </b> <br>
+                    ex: <br>
+                    -const arr = ["John", "Michael", "Lucas", "Joe"]; <br>
+                    -const myJSON = JSON.stringify(arr); <br>
+                    *myJSON agora é um Array, pronto para ser enviado para o servidor
+                </p>
+                <p>
+                    A função JSON.Stringify(),  na conversão, transforma datas em Strings <br>  
+                    A função JSON.Stringify() irá eliminar quaisquer funções de um Javascript Object, tanto a "key" como o "value"
+                </p>
+
+            <h2>JSON String</h2>
+                <p>'{"name": "John", "age": 30, "car":null}'</p>
+
+            <h2>JSON Object Literal</h2>
+                <p>
+                    {"name": "John", "age": 30, "car": null} <br> <br>
+                    JSON Object Literals são cercados por chaves {} <br>
+                    JSON Object Literals contêm key/value pairs <br>
+                    ∟keys e values são separados por vírgula <br>
+                    ∟keys devem ser strings e values devem ser de um tipo JSON válido <br> <br>
+
+                    Mistankenly JSON Object Literals are usually called JSON Objects, but JSON cannot be an object, The data can only be a JSON when it is in a String format. <br>
+                    When converted to a Javascript variable, it becomes a Javascript Object. <br> <br>
+
+                    De forma mais comum, criamos uma variável no formato String JSON e só então a convertemos em um Javascript Object <br>
+		            ex: <br>
+			        -myJSON = '{"name":"John", "age":30, "car":null}';	*String JSON criada <br>
+			        -myObj = JSON.parse(myJSON);		*String JSON convetida em objeto <br>
+                    Contudo, também é possível criar um Javascript Object diretamente de um JSON Object Literal <br>
+		            ex: <br>
+			        -myObj = {"name":"John", "age":30, "car":null};
+                </p>
+                <ul>
+                    <li><b>Acessando valores dentro de um objeto</b></li>
+                    <p>
+                        Os valores dentro de um objeto podem ser acessados usando dois tipos de notações: <br>
+                        <b>PONTO FINAL .</b> <br>
+			            x = myObj.name;<br> <br>
+                    
+		                <b>COLCHETES [ ]</b> <br>
+			            x = myObj["name"]; <br>
+                </ul>
+                <ul>
+                    <li><b>Loops dentro de um Objeto</b></li>
+                    <p>
+                        As propriedades de um objeto podem ser acessadas com um loop <b>for .. in </b> <br>
+                        ex: <br>
+                        -const text = ' {"name": "John", "age": 30, "car": null} '; <br>
+                        -const myObj = JSON.parse(text); <br>
+                        -for ( const x in myObj ) { <br>
+                        --console.log (x);   		//Utilizando apenas a variável: mostrada a key <br>
+                        --console.log(myObj[x]) 	//Utilizando a variável entre colchetes: mostrada o value <br>
+                        -} <br>
+                    </p>
+                </ul>
+
+            <h2>JSON Array Literal</h2>
+                <p>
+                    JSON String			→ '["Ford", "BMW", "Fiat"]' <br>
+                    Array Literal dentro da JSON String 	→  ["Ford", "BMW", "Fiat"] <br>
+                </p>
+                <ul>
+                    <li><b>Arrays dentro de Objects</b></li>
+                    <p>
+                        const text =  '{ "name": "John", "age": 30, "cars": ["Ford", "BMW", "Fiat"] }' <br>
+                        const myObj = JSON,parse(text); <br> <br>
+            
+                        Acessando os valores do array: <br>
+                        -myObj.cars[0]	//Usa-se colchetes e a enumeração do value desejado <br>
+                    </p>
+                </ul>
+                <ul>
+                    <li><b>LOOP EM UM ARRAY</b></li>
+                    <p>
+                        Pode ser usado <b>for .. in</b>: <br>
+                        -const myJSON = '{"name":"John", "age":30, "cars":["Ford", "BMW", "Fiat"]}'; <br>
+                        -const myObj = JSON.parse(myJSON); <br>
+                        -for ( let x in myObj.cars ){ <br>
+                        --console.log( myObj.cars[x] );    //Usando-se a variável 'x' entre colchetes <br>
+                        -} <br> <br>
+            
+                        Também pode ser usado <b>for</b>: <br>
+                        -const myJSON = '{"name":"John", "age":30, "cars":["Ford", "BMW", "Fiat"]}'; <br>
+                        -const myObj = JSON.parse(myJSON); <br>
+                        -for ( let x=0; x&#60myObj.cars.length; x++){ <br>
+                        --console.log(myObj.cars[x]); <br>
+                        -}<br>
+                    </p>
+                </ul>
+
+            <h1>JSON vs XML</h1>
+                <h2>JSON</h2>
+                <p>
+                    { "cars": [ <br>
+		            { <br>
+		            "brand": "dodge", <br>
+		            "model": "charger" <br>
+		            } <br>
+		            { <br>
+		            "brand": "ford", <br>
+		            "model": "mustang" <br>
+		            } <br>
+		            { <br>
+		            "brand": "chevrolet", <br>
+		            "model": "camaro" <br>
+		            } <br>	 
+		            ] } <br>
+                </p>
+
+                <h2>XML</h2>
+                <p>
+                    &#60cars> <br>
+                        &#60car> <br>
+                        &nbsp &#60brand>Dodge &#60/brand> <br>
+                        &nbsp &#60model>Charger &#60/model> <br>
+                        &#60/car> <br>
+                        &#60car> <br>
+                        &nbsp &#60brand>Ford &#60/brand> <br>
+                        &nbsp &#60model>Mustang &#60/model> <br>
+                        &#60/car> <br>
+                        &#60car> <br>
+                        &nbsp &#60brand>Chevrolet &#60/brand> <br>
+                        &nbsp &#60model>Camaro &#60/model> <br>
+                        &#60/car> <br>
+                    &#60/cars> <br>
+                </p>
+                <p>
+                    <b>Vantagens do JSON:</b> <br>
+                    Não usa end tags <br>
+                    É mais curto <br>
+                    É mais rápido para se ler e escrever <br>
+                    Pode usar vetores <br>
+                </p>
+
+        </div>
+    </body>
+</html>
