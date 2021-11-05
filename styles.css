@@ -1,5 +1,165 @@
-body{
-    background-color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
+*{
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif !important;
+    /*font-family: 'Fira Mono', monospace;*/
+    /*font-family: 'Roboto Mono', monospace;*/
+}
+
+.bd-content{
+    position: relative;
+    padding-right: 1.5rem;
+    margin: 4% 0 4% 0;
+}
+.boundingLines{
+    border: 1pt solid black;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 30px;
+    z-index: -1;  /* Specifies the stack order of an element, here used to hide the div borders behind the title*/
+}
+.smallerWidth{
+    border: 1pt solid black;
+    width: 80%;
+    left: 10%;
+}
+
+h2{
+    font-size: 2.3rem;
+    font-weight: 500;
+}
+h3{
+    font-size: 1.9rem !important;
+    font-weight: 400;
+}
+
+p{
+    font-size: 1.3rem;
+}
+
+mark{
+    background-color: white;
+    padding: 0 5px 0 5px;   
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.bd-main h1{
+    font-size: 2rem;
+}
+.bd-main h1 b{
+    font-size: 8rem;
+}
+#titleLower{
+    background-color: white;
+    font-size: 1rem;
+}
+
+li{
+    font-size: 1.3rem;
+    padding-right: 2em;
+    font-weight: 400;
+}
+li b{
+    font-size: 1.3rem;
+    font-weight: 750;
+}
+
+code{
+    font-family: 'Roboto Mono', monospace !important;
+    font-size: 1rem;
+    color: black;
+}
+mark{
+    background-color: white;
+    padding: 0 5px 0 5px;   
+    font-size: 3rem;
+    font-weight: 400;
+}
+.inlineCodeTag{
+    font-family: 'Roboto Mono', monospace !important;
+    background-color: rgba(0, 0, 0, 0.100);
+    padding: 0.2em 0.8em;
+    border-radius: 4px;
+}
+.codeBg{
+    background-color: rgba(0, 0, 0, 0.100);
+    border-radius: 10px;
+    padding: 0px;
+    margin-right: 3rem;
+    font-size: 1rem;
     color: rgb(0, 0, 0);
 }
+.bigCode{
+    padding: 0.5em 1em; 
+    font-size: 1.8rem;
+}
+
+.oloko pre{
+    width: 100%;
+}
+
+/* DEFINES A PADDING-TOP SO THE CONTENT AND TITLE FROM THE DIVS ARE SEPARATED */
+.content{
+    padding-top: 2em;
+}
+
+.names{
+    width: 10px;
+    background-color: red;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 0, 0, 0.200);
+}
+th{
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0.25em 0.75em;
+    border: 1px solid rgba(0, 0, 0, 0.200);
+    border-collapse: collapse;
+}
+td{
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0.25em 0.75em;
+    border: 1px solid rgba(0, 0, 0, 0.200);
+    border-collapse: collapse;
+}
+tr:nth-child(even){
+    background-color: rgba(255, 0, 0, 0.100);
+}
+.tableCode{
+    font-family: 'Roboto Mono', monospace !important;
+}
+
+
+.initialBubbles{
+    padding: 0 5px 0 5px;
+}
+.infoSquare{
+    border-radius: 10px;
+    color: white;
+    font-size: 2rem;
+    font-weight: 350;
+    padding: 1em 1em 1em 1em;
+    background-color: rgba(255, 0, 0, 0.600);
+}
+.infoSquare b{
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+#firstExample{
+    background-color: rgba(0, 0, 0, 0.100);
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
