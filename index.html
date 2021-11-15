@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!--External CSS-->
+        <link rel="stylesheet" href="styles.css" >
+        <!--Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-xxl">
+            <div class="bd-main">
+                <!-- <h1><b>J</b>ava<b>S</b>cript <b>O</b>bject <b>N</b>otation </h1> -->
+                <h1><b>JSON</b> JavaScript Object Notation</h1>
+                <!-- <p>
+                    O JSON tem o objetivo de armazenar informações <br>
+                    O JSON é usado para permutar dados com um servidor web
+                    Leve e fácil de ser interpretado tanto por máquinas como por pessoas <br>
+                </p> -->
+            </div>
+            <hr><br>
+        </div>
+
+        <div class="container-xxl">
+            <div class="bd-content">
+                <div class="row justify-content-center">
+                    <p class="text-center"><mark>O JSON pode ser usado para</mark></p>
+                    <div class="initialBubbles col-lg-3 col-xl-4 ps-4">
+                        <p class="text-center infoSquare"><b>Enviar</b> dados para um servidor</p>
+                    </div>
+                    <div class="text-center col-lg-3 col-xl-4 ps-4">
+                        <p class="justify-content-center infoSquare"><b>Receber</b> dados de um servidor</p>
+                    </div>
+
+                    <div class="col-lg-8 ps-4">
+                        <hr>
+                        <ul class="ps-4">
+                            <li>Os dados sempre são <b>recebidos</b> do servidor em formato <b>String</b>;</li>
+                            <li>Os dados sempre são <b>enviados</b> ao servidor em formato <b>String</b>;</li><br>
+                            <li>Os dados sempre virão entre <b>aspas simples</b>;</li>
+                        </ul>
+                        <pre>
+Exemplo
+<code id="firstExample">'{"name":"Ana", "age":19, "city":"Contagem", <b>"key": "value"</b>, ...}'</code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container-xxl">
+            <div class="bd-content">
+                <div class="boundingLines"></div>
+                <div class="ps-4">
+                    <h2><mark>Sintaxe</mark></h2>
+                    <div class="content">
+                        <ul>
+                            <li>A sintaxe do JSON é baseada na <b>Object Notation</b> do Javascript;</li>
+                            <li>Por ser apenas texto, pode ser interpretado por outras linguagens, além do próprio Javascript.</li><br><br>
+                            <li><b>OBJETOS</b> do JavaScript podem ser escritos em JSON;</li>
+                                <ul><li>As <b>Chaves</b> <code class="inlineCodeTag"><b>{ &nbsp }</b></code> sempre irão conter objetos dentro de si</li></ul><br>
+                            <li><b>VETORES</b> do JavaScript também podem ser escritos em JSON.</li>
+                                <ul><li>Os <b>Colchetes</b> <code class="inlineCodeTag"><b>[ &nbsp ]</b></code> sempre irão conter vetores dentro de si</li></ul><br><br> 
+                            <li>As informações são representadas na forma <code class="inlineCodeTag"><b>"key": "value"</b></code>
+                                <ul>
+                                    <li>Cada <b>key</b> e <b>value</b> é envolvido por aspas duplas <code class="inlineCodeTag"><b>" &nbsp "</b></code></li>
+                                    <li>Cada dupla <b>key-value</b> é separada da próxima por vírgula</li>
+                                    <li>o último não terá virgula por não ser seguido por mais nenhum key/value pair.</li>
+                                </ul>
+                            </li><br>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container-xxl">
+            <div class="bd-content">
+                <div class="boundingLines"></div>
+                <div class="ps-4">
+                    <h1><mark>Tipos de Valores</mark></h1>
+                    <div class="content ps-4">
+                        <h2>VALORES VÁLIDOS</h2>
+                        <div class="ps-4">
+                            <p>Os valores considerados válidos em JSON são:</p>
+                            <img src="valores.jpg" alt="valroes" width="100%">
+                            <br><br><br><hr><br><br>
+                        </div>
+
+                        <h2>VALORES INVÁLIDOS</h2>
+                        <div class="ps-4">
+                            <ul>
+                                <li><h3>Funções</h3>
+                                    <ul>
+                                        <li>Não é recomendado usar funções no JSON, pois elas perderão seu escopo</li>
+                                        <li>É necessário usar o <code class="inlineCodeTag">eval()</code> para convertê-las novamente em funções</li>
+                                        <li>Não é recomendado usar a função eval()</li><br>
+                                        <li>Caso seja necessário incluir funções dentro do JSON, elas deverão ser escritas no formato <b>String</b></li>
+                                        <li>Após isso, é necessário converter a String em função novamente:</li>
+                                        <pre class="codeBg ps-4">
+                                            <code>
+const text = ' { "name": "Michael", "age": "function () { return 30; }" } ';
+const obj = JSON.parse(text);
+obj.age = eval(" (" + obj.age + ") ");
+                                            </code>
+                                        </pre>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li><h3>Datas</h3>
+                                    <ul>
+                                        <li>Caso seja necessário incluir datas dentro do JSON, estas deverão ser escritas no formato <b>String</b> <br></li>
+                                        <li>Após isso é necessário converter a String novamente em data: <br></li>
+                                        <pre class="codeBg ps-4">
+                                            <code>
+const text = ' {"name":"John", "birth":"1986-12-14"} ';
+const obj = JSON.parse(text);
+obj.birth = new Date(obj.birth); //CONVERSÃO
+                                            </code>
+                                        </pre>
+                                        <br>
+                                        <li>Para converter a data também pode ser usado o parâmetro chamado <b>reviver</b></li>
+                                        <li>O reviver é o <b>segundo parâmetro</b> da função <code class="inlineCodeTag">JSON.parse()</code></b></li>
+                                        <li>O parâmetro reviver é uma <b>função</b> que verifica cada propriedade antes de retornar um valor</li>
+                                        <pre class="codeBg ps-4">
+                                            <code>
+const text = ' { "name": "Michael", "birth": 1984-12-14 } '
+const obj = JSON.parse(text, function (key, value) {
+if (key == birth)
+return new Date (obj.birth);
+else
+return value;
+});
+                                            </code>
+                                        </pre>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <h3>• undefined</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container-xxl">
+            <div class="bd-content">
+                <div class="boundingLines"></div>
+                <div class="ps-4">
+                    <h1><mark>Funções Javascript</mark></h1>
+                    <div class="ps-4">
+                        <p>O próprio Javascript tem funções específicas para o JSON:</p><br>
+                        <h2>JSON.Parse()</h2>
+                            <ul>
+                                <li><b>Converte</b> as <b>Strings JSON</b> que foram retornadas por um servidor qualquer </li>
+                                    <ul>
+                                        <li>As Strings Serão convertidas em <b>objetos do Javascript</b> </li>
+                                    </ul><br>
+                                <li><b>Converte</b> também os <b>Arrays JSON</b> que foram retornadas por um servidor qualquer </li>
+                                    <ul>
+                                        <li>Os Arrays serão convertidos em <b>vetores do Javascript</b> </li><br>
+                                    </ul>
+                            </ul>
+                        <hr><br>
+                        
+                        <h2>JSON.Stringify() </h2>
+                        <ul>
+                            <li>Converte <b>Javascript Objects</b> para que sejam enviados para um servidor como <b>Strings JSON</b><br>
+                            <p>Exemplo:</p>
+                            <pre class="codeBg ps-4">
+                                <code>
+const obj = {name: "John", age: 30};
+const myJSON = JSON.stringify(obj);
+
+*myJSON agora é uma String, pronta para ser enviada para o servidor
+                                </code>
+                            </pre><br>
+                            <li>Também converte <b>Javascript Arrays</b> em <b>Strings JSON</b> </li>
+                            <p>Exemplo:</p>
+                            <pre class="codeBg ps-4">
+                                <code>
+const arr = ["John", "Michael", "Lucas", "Joe"];
+const myJSON = JSON.stringify(arr)
+*myJSON agora é um Array, pronto para ser enviado para o servidor
+                                </code>
+                            </pre><br>
+                            <li>A função <code class="inlineCodeTag">JSON.Stringify()</code> transforma <b>datas</b> em <b>Strings</b> na conversão</li>  
+                            <li>A função <code class="inlineCodeTag">JSON.Stringify()</code> irá <b>eliminar quaisquer funções</b> de um Javascript Object, tanto a "key" como o "value"</li>  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="container-xxl">
+            <div class="bd-content">
+                <div class="boundingLines"></div>
+                <div class="ps-4">
+                    <h1><mark>String vs Object Literal</mark></h1>
+                    <div class="content px-4">
+                        <h2>JSON String</h2>
+                        <div class="ps-4">
+                            <pre><code class="inlineCodeTag bigCode">'{"name": "John", "age": 30, "car":null}'</code>
+                            </pre>
+                            <br><hr><br>
+                        </div>
+    
+                        <h2>JSON Object Literal</h2>
+                        <div class="ps-4">
+                            <pre><code class="inlineCodeTag bigCode">{"name": "John", "age": 30, "car": null}</code>
+                            </pre>
+                            <ul>
+                                <li>Object Literals são contidos entre chaves <code class="inlineCodeTag"><b>{ &nbsp }</b></code></li>
+                                <li>
+                                    Object Literals contêm <b>key-value</b> pairs 
+                                    <ul>
+                                        <li>keys e values são separados por vírgula</li>
+                                        <li>keys devem ser strings e values devem ser de um tipo JSON válido</li>
+                                    </ul>
+                                </li><br>
+                                <li>Mistankenly JSON Object Literals are usually called JSON Objects, but JSON cannot be an object, The data can only be a JSON when it is in a String format.</li>
+                                <li>When converted to a Javascript variable, it becomes a Javascript Object.</li><br>
+                                <li>A forma mais comum é criar uma variável no formato <b>String JSON</b> e convertê-la em <b>Javascript Object</b></li>
+                                <p>ex:</p>
+                                <pre class="codeBg ps-4">
+                                    <code>
+myJSON = '{"name":"John", "age":30, "car":null}';	*String JSON criada
+myObj = JSON.parse(myJSON);		*String JSON convetida em objeto
+                                    </code>
+                                </pre>
+                                <li>Também é possível criar um Javascript Object diretamente de um JSON Object Literal</li>
+                                <p>ex:</p>
+                                <pre class="codeBg ps-4">
+                                    <code>
+myObj = {"name":"John", "age":30, "car":null};
+                                    </code>
+                                </pre>
+                            </ul><br><hr><br>
+
+                            <h1>Acessando valores dentro de um objeto</h1>
+                            <div class="ps-4">
+                                <ul>
+                                    <li>Os valores dentro de um objeto podem ser acessados usando dois tipos de notações:</li>
+                                    <ul>
+                                        <li>
+                                            <b>PONTO FINAL</b> <code class="inlineCodeTag"><b>.</b></code> <br>
+                                            x = myObj.name;<br> <br>
+                                        </li>
+                                        <li>
+                                            <b>COLCHETES</b> <code class="inlineCodeTag">[ ]</code></b> <br>
+                                            x = myObj["name"]; <br>
+                                        </li>
+                                    </ul>
+                                </ul>
+                            </div><br><hr><br>
+
+                            <h1>Loops dentro de um Objeto</h1>
+                            <div class="ps-4">
+                                <p>
+                                    As propriedades de um objeto podem ser acessadas com um loop <code class="inlineCodeTag">for .. in</code> </b> <br>
+                                    Exemplo:
+                                </p>
+                                <pre class="codeBg ps-4">
+                                    <code>
+const text = ' {"name": "John", "age": 30, "car": null} ';
+const myObj = JSON.parse(text);
+for ( const x in myObj ) {
+    console.log (x);   		//Utilizando apenas a variável: mostrada a key
+    console.log(myObj[x]) 	//Utilizando a variável entre colchetes: mostrada o value
+}
+                                    </code>
+                                </pre>
+                            </div><br><hr><br>
+        
+                            <h1>JSON Array Literal</h1>
+                            <p>
+                                JSON String = <code class="inlineCodeTag"> <b>'</b>["Ford", "BMW", "Fiat"]<b>'</b></code> <br>
+                                Array Literal = <code class="inlineCodeTag"> ["Ford", "BMW", "Fiat"]</code> *Está dentro da JSON String<br>
+                            </p>
+                            <ul>
+                                <li><b>Arrays dentro de Objects</b></li>
+                                <pre class="codeBg px-4">
+                                    <code>
+const text =  '{ "name": "John", "age": 30, "cars": ["Ford", "BMW", "Fiat"] }'
+const myObj = JSON,parse(text);
+                                    </code>
+                                </pre>
+                                <p>Acessando os valores do array: <br></p>
+                                <pre class="codeBg px-4">
+                                    <code>
+myObj.cars[0]	//Usa-se colchetes e a enumeração do value desejado
+                                    </code>
+                                </pre>
+                            </ul>
+                            <ul>
+                                <li><b>Loop em um Array</b></li>
+                                <p>Pode ser usado <code class="inlineCodeTag">for ... in</code></p>
+                                <pre class="codeBg px-4">
+                                    <code>
+const myJSON = '{"name":"John", "age":30, "cars":["Ford", "BMW", "Fiat"]}';
+const myObj = JSON.parse(myJSON);
+for ( let x in myObj.cars ){
+    console.log( myObj.cars[x] );    //Usando-se a variável 'x' entre colchetes
+}
+                                    </code>
+                                </pre>
+                                <p>Tamém pode ser usado <code class="inlineCodeTag">for</code></p>
+                                <pre class="codeBg px-4">
+                                    <code>
+const myJSON = '{"name":"John", "age":30, "cars":["Ford", "BMW", "Fiat"]}'; 
+const myObj = JSON.parse(myJSON); 
+for ( let x=0; x&#60myObj.cars.length; x++){ 
+    console.log(myObj.cars[x]); 
+}
+                                    </code>
+                                </pre>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <br>
+    
+        <div class="container-xxl">
+            <div class="bd-content">
+                <h1 class="text-center">JSON vs XML</h1>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 oloko">
+                        <h2 class="text-center infoSquare">JSON</h2>
+                        <pre class="codeBg ps-4">
+                            <code>
+{ "cars": [ 
+    { 
+        "brand": "dodge", 
+        "model": "charger" 
+    } 
+    { 
+        "brand": "ford", 
+        "model": "mustang" 
+    } 
+    { 
+        "brand": "chevrolet", 
+        "model": "camaro" 
+    } 	 
+] } 
+                            </code>
+                        </pre>
+                        <ul>
+                            <li><b>Vantagens JSON:</b></li>
+                            <ul>
+                                <li>Não usa end tags;</li>
+                                <li>Mais curto;</li>
+                                <li>Mais rápido para se ler e escrever;</li>
+                                <li>Pode usar vetores.</li>
+                            </ul>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 oloko">
+                        <h2 class="text-center infoSquare">XML</h2>
+                        <pre class="codeBg ps-4">
+                            <code>
+&#60cars> 
+    &#60car> 
+        &#60brand>Dodge &#60/brand> 
+        &#60model>Charger &#60/model> 
+    &#60/car> 
+    &#60car> 
+        &#60brand>Ford &#60/brand> 
+        &#60model>Mustang &#60/model> 
+    &#60/car> 
+    &#60car> 
+        &#60brand>Chevrolet &#60/brand> 
+        &#60model>Camaro &#60/model> 
+    &#60/car> 
+&#60/cars> 
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>
